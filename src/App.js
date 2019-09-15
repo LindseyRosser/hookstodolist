@@ -1,57 +1,87 @@
 import React, { useState } from 'react';
-import './App.css'
 
-function App() {
-  const [todoValue, setTodoValue] = useState('');
-  const [todos, setTodo] = useState([])
 
-  const handleChange = e => {
-    setTodoValue(e.target.value);
+
+function AddToDoForm ({addTodo}) {
+  const [text, setText] = useState("");
+
+  const submitToDo = (ev)=>{
+    ev.preventDefault();
+
+    if(text){
+      addTodo(text);
+      setText("")
+    }else{
+      alert("A value is required!");
+    }
+
   }
 
-  const handleSubmit = e => {
-    e.preventDefault();    
-    const todo = {
-      value: todoValue,
-      done: false
+  return(
+    <form onSubmit={submitToDo}>
+      <div>
+        <input
+          className="todo-input"
+          placeholder="Start typing..."
+          onChange={(ev)=>{
+            setText(ev.target.value)
+          }}
+          value={text}
+        />
+        <button>Submit</button>
+      </div>
+    </form>
+  )
+}
+function App () {
+  const [todos, setTodos] = useState([
+    {
+      text:"Clean house",
+      isDone:false
+    },    {
+      text:"Grocery shop",
+      isDone:false
+    },    {
+      text:"Pay bills",
+      isDone:false
+    },
+
+    {
+      text:"Feed dog",
+      isDone:false
     }
     
-    if(!todoValue) return;
-    setTodo([...todos, todo]);
-    document.getElementById('todoValue').value = ''
+  ]);
+  
+  const addTodo = (text)=>{
+    setTodos([...todos, {text}]);
   }
 
-  const handleDelete = e => {
-    const { id } = e.target.parentElement;
-    todos.splice(id, 1)
-    setTodo([...todos]);
+  const toggleTodoStatus = (payload)=>{
+    const { status, index } = payload;
+    console.log(payload)
+    const myNewTodos = [...todos];
+    myNewTodos[index].isDone = status;
+    setTodos(myNewTodos)
   }
-
-  const handleDone = e => {
-    const { id } = e.target.parentElement;
-    todos[id].done = !todos[id].done
-    setTodo([...todos])
-  }
-
   return (
-    <div className="todo-list">
-      <h1 className="head"> Todo List (React Hooks)</h1>
-      <div className="todos">
-        {
-          todos && todos.map((todo, i) => (
-            <div className="todo-block" key={todo.value} id={i}>
-              <button className={todo.done ? 'done' : 'not-done'} onClick={handleDone}>{todo.value}</button>
-              <button className="delete-todo" onClick={handleDelete} >x</button>              
+    <div className="app">
+      <h1>Todo List</h1>
+      <AddToDoForm addTodo={addTodo}/>
+      {
+        todos.map((todo, index)=>{
+          const { text, isDone} = todo;
+          const btnText = isDone ? "Undo" : "Done";
+          return(
+            <div key={index} className="list-item">
+              <span className={isDone ? "strike-through" : ""}>{text}</span>
+              <button className={`status-btn ${isDone ? "done" : ""}`} onClick={()=>toggleTodoStatus({status:!isDone, index})}>{btnText}</button>
             </div>
-          ))
-        }
-      </div>
-      <form className="todo-form" onSubmit={handleSubmit}>
-        <input type="text" id="todoValue" onChange={handleChange}/>
-        <button type="submit">Add Todo</button>
-      </form>
+         );
+        })
+      }
     </div>
-  )
+  );
 }
 
 export default App;
