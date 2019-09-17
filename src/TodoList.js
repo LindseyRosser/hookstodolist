@@ -10,6 +10,7 @@ export const TodoList = ({ todos }) => {
     root: classes.bg
   }}>
     {todos.map(todo => (
+        
       <TodoItem key={todo.id} todo={todo} />
     ))}
   </List>

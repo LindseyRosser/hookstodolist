@@ -58,17 +58,20 @@ const App = () => {
   return (
     <ThemeProvider theme={isDayTheme ? themeDay : themeNight}>
       <TodoContext.Provider value={dispatchTodos}>
+
       <Paper classes={{ root: classes.wide }}>
           <Container maxWidth="lg" classes={{ root: classes.bg }}>
             <Paper classes={{ root: classes.bg }} >
               <AppBar position="static" color="primary">
                 <Toolbar classes={{ root: classes.header }}>
                   <Typography variant="h6" color="inherit">
+
                     Todo App
-                  </Typography>
+               </Typography>
                   <ThemeSwitch theme={isDayTheme} toggleTheme={toggleTheme} />
                 </Toolbar>
               </AppBar>
+
               <AddTodo />
               {todos.length > 0 ? (
                 <FilterTodos dispatch={dispatchFilter} />

@@ -11,6 +11,7 @@ export const themeNight = createMuiTheme({
       main: "#904E55"
     },
 
+
     type: "dark"
   }
 });
@@ -18,6 +19,7 @@ export const themeNight = createMuiTheme({
 export const themeDay = createMuiTheme(
     {
         palette: {
+            
             primary: {
               main: "#F2EFE9"
             },

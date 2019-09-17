@@ -11,6 +11,7 @@ import { useStyles } from './styles';
 import './index.css'
 
 export const TodoContext = createContext(null);
+  
 
 export const TodoItem = ({ todo }) => {
   const classes = useStyles();
@@ -21,7 +22,9 @@ export const TodoItem = ({ todo }) => {
     setTxt(event.target.value);
   };
 
+
   const handleCancel = () => {
+
     setTxt(todo.text);
   }
 
@@ -53,16 +56,18 @@ export const TodoItem = ({ todo }) => {
 
   return (
     <ListItem divider={true}>
+
       <ListItemIcon>
-        <Checkbox checked={todo.complete} onChange={handleToggle} />
+           <Checkbox checked={todo.complete} onChange={handleToggle} />
       </ListItemIcon>
       {todo.editing ? (
         <form className={classes.form} onSubmit={handleEditSubmit}>
           <TextField value={txt} onChange={handleChange} fullWidth >
-            {txt}
+             {txt}
           </TextField>
           <IconButton onClick={handleEditSubmit}>
-              <Icon>check</Icon>
+              
+                  <Icon>check</Icon>
             </IconButton>
             <IconButton onClick={handleCancel}>
               <Icon>undo</Icon>
@@ -71,13 +76,14 @@ export const TodoItem = ({ todo }) => {
       ) : (
         <>
           <ListItemText primary={txt} />
+
           <ListItemSecondaryAction>
             <IconButton onClick={handleEdit}>
-              <Icon>edit</Icon>
+                <Icon>edit</Icon>
             </IconButton>
             <IconButton onClick={handleDelete}>
               <Icon>delete</Icon>
-            </IconButton>{" "}
+               </IconButton>{" "}
           </ListItemSecondaryAction>
         </>
       )}

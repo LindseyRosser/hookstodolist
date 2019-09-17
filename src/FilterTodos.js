@@ -13,6 +13,8 @@ export const FilterTodos = ({ dispatch }) => {
   return (
 
       <Tabs
+
+      
         value={value}
         onChange={handleChange}
         indicatorColor="secondary"
