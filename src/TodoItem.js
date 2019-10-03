@@ -5,10 +5,12 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import TextField from "@material-ui/core/TextField";
 import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
-import IconButton from "@material-ui/core/IconButton";
+import IconButton from "@material-ui/core/IconButton/";
 import Icon from "@material-ui/core/Icon";
 import { useStyles } from './styles';
-import './index.css'
+import './index.css';
+
+
 
 export const TodoContext = createContext(null);
   
@@ -61,12 +63,12 @@ export const TodoItem = ({ todo }) => {
            <Checkbox checked={todo.complete} onChange={handleToggle} />
       </ListItemIcon>
       {todo.editing ? (
-        <form className={classes.form} onSubmit={handleEditSubmit}>
+        <form className={classes.form}  onSubmit={handleEditSubmit}>
           <TextField value={txt} onChange={handleChange} fullWidth >
              {txt}
           </TextField>
           <IconButton onClick={handleEditSubmit}>
-              
+
                   <Icon>check</Icon>
             </IconButton>
             <IconButton onClick={handleCancel}>

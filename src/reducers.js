@@ -1,5 +1,8 @@
 import uuid from "uuid/v4";
 
+
+
+
 export const filterReducer = (state, action) => {
   switch (action.type) {
     case "SHOW_ALL":
@@ -31,6 +34,8 @@ export const todoReducer = (state, action) => {
         complete: false,
         editing: false
       });
+
+ 
 
     case "DELETE_TODO":
       return state.filter(todo => todo.id !== action.id);
